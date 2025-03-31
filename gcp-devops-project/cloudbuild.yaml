@@ -1,8 +1,7 @@
 steps:
   # Step 1: Build Docker Image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/diesel-post-453122-r2/hello-world-app:latest', '.']
-
+    args: ['build', '-t', 'gcr.io/diesel-post-453122-r2/hello-world-app:$COMMIT_SHA', '.']
 
   # Step 2: Push Image to Google Container Registry
   - name: 'gcr.io/cloud-builders/docker'
@@ -14,5 +13,5 @@ steps:
     args:
       - '-c'
       - |
-          kubectl set image deployment/hello-world-app hello-world-app=gcr.io/ diesel-post-453122-r/hello-world-app:$COMMIT_SHA
+          kubectl set image deployment/hello-world-app hello-world-app=gcr.io/diesel-post-453122-r2/hello-world-app:$COMMIT_SHA
           kubectl rollout status deployment/hello-world-app
