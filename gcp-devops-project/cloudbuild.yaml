@@ -1,17 +1,35 @@
 steps:
   # Step 1: Build Docker Image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/diesel-post-453122-r2/hello-world-app:$COMMIT_SHA', '.']
+    args: ['build', '-t', 'gcr.io/diesel-post-453122-r2/hello-world-app:${_SHORT_SHA}', '-t', 'gcr.io/diesel-post-453122-r2/hello-world-app:latest', '.']
 
   # Step 2: Push Image to Google Container Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/diesel-post-453122-r2/hello-world-app:$COMMIT_SHA']
+    args: ['push', 'gcr.io/diesel-post-453122-r2/hello-world-app:${_SHORT_SHA}']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/diesel-post-453122-r2/hello-world-app:latest']
 
-  # Step 3: Deploy to GKE
+  # Step 3: Authenticate with GKE
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: 'bash'
     args:
       - '-c'
       - |
-          kubectl set image deployment/hello-world-app hello-world-app=gcr.io/diesel-post-453122-r2/hello-world-app:$COMMIT_SHA
-          kubectl rollout status deployment/hello-world-app
+        gcloud container clusters get-credentials my-cluster --region us-central1
+        kubectl config current-context
+
+  # Step 4: Deploy to GKE
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        kubectl set image deployment/hello-world-app hello-world-app=gcr.io/diesel-post-453122-r2/hello-world-app:${_SHORT_SHA}
+        kubectl rollout status deployment/hello-world-app
+
+substitutions:
+  _SHORT_SHA: 'latest'
+
+images:
+  - 'gcr.io/diesel-post-453122-r2/hello-world-app:${_SHORT_SHA}'
+  - 'gcr.io/diesel-post-453122-r2/hello-world-app:latest'
