@@ -1,5 +1,4 @@
-
-        app: hello-world-app
+app: hello-world-app
     spec:
       containers:
       - name: hello-world-app
