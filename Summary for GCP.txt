@@ -1,6 +1,6 @@
 Summary of the Cloud Build Code:
 
- 1. Build a Docker image:
+1. Build a Docker image:
 Uses your app’s code to create a Docker image.
 Tags it with both a specific version (${_SHORT_SHA}) and latest.
 
