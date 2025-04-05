@@ -1,0 +1,44 @@
+Summary of the Cloud Build Code:
+ 1. Build a Docker image:
+Uses your app’s code to create a Docker image.
+Tags it with both a specific version (${_SHORT_SHA}) and latest.
+
+ 2. Push the image to Google Container Registry (GCR):
+Uploads the Docker image to GCR with both tags for storage and future use.
+Connect to the Kubernetes cluster (GKE)
+Authenticates and gets access to your Kubernetes cluster using gcloud.
+
+ 3. Deploy the image to GKE:
+Updates the Kubernetes deployment to use the newly built image.
+Waits until the update is complete and healthy.
+
+ 4. Tagging helps with tracking and flexibility
+latest: For always deploying the newest version quickly.
+${_SHORT_SHA}: For precise version control, rollback, and debugging.
+
+Kubernetes Deployment + Service Summary
+ 1. Deploys a containerized app (hello-world-app)
+Uses the Docker image: gcr.io/diesel-post-453122-r2/hello-world-app:latest.
+Runs it on port 8080 inside the container.
+
+ 2. Health checks using probes
+Liveness probe checks if the app is still running (every 10 seconds after a 10-second delay).
+Readiness probe checks if the app is ready to receive traffic (every 5 seconds after a 5-second delay).
+
+ 3. Exposes the app using a Kubernetes Service
+A Service of type LoadBalancer is created to make the app accessible externally.
+
+ 4. Routes external traffic from port 80 to the app’s port 8080
+The service listens on port 80 and forwards requests to the app's port 8080.
+
+ 5. Uses label selector to connect to the correct pods
+The service targets pods with the label app: hello-world-app.
+
+Summary of the Kubernetes Service code:
+ 1. Creates a LoadBalancer Service named hello-world-service
+Exposes the app to the internet by creating an external IP.
+ 2. Routes traffic from port 80 to app pods on port 8080
+ Uses the label app: hello-world-app to find the right pods.
+
+
+
