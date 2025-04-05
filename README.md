@@ -1,67 +1,16 @@
 Application running on : http://34.41.14.233 
 commands i run on cloudshell:
-git clone https://github.com/RaniRani198/gcp/tree/main/gcp-devops-project
-git clone https://github.com/RaniRani198/gcp
+git clone https://github.com/RaniRani198/gcp.git
 ls
 cd gcp
 ls
 cd cloudbuild.yaml
-git clone https://github.com/RaniRani198/gcp/tree/main/gcp-devops-project
-ls
-cd gcp-devops-project
-cd cloudbuild.yaml
-git clone https://github.com/RaniRani198/gcp.git
-ls
-cd cloudbuild.yaml
 vi cloudbuild.yaml
 gcloud builds submit --config cloudbuild.yaml .
 ls
-vi cloudbuild.yaml
-gcloud builds submit --config cloudbuild.yaml .
-git clone https://github.com/RaniRani198/gcp.git
-ls
-cat cloudbuild.yaml
-vi cloudbuild.yaml
-cat cloudbuild.yaml
-gcloud builds submit --config cloudbuild.yaml .
-vi cloudbuild.yaml
-cat cloudbuild.yaml
-gcloud builds submit --config cloudbuild.yaml .
-vi cloudbuild.yaml
-cat cloudbuild.yaml
-gcloud builds submit --config cloudbuild.yaml .
-vi cloudbuild.yaml
-gcloud builds submit --config cloudbuild.yaml .
-cat cloudbuild.yaml
-vi cloudbuild.yaml
-cat cloudbuild.yaml
-gcloud builds submit --config cloudbuild.yaml .
-cat cloudbuild.yaml
-vi cloudbuild.yaml
-cat cloudbuild.yaml
 vi cloudbuild.yaml
 gcloud builds submit --config cloudbuild.yaml .
 gcloud container clusters list --project diesel-post-453122-r2
-vi cloudbuild.yaml
-gcloud builds submit --config cloudbuild.yaml .
-cat cloudbuild.yaml
-vi cloudbuild.yaml
-gcloud builds submit --config cloudbuild.yaml .
-vi cloudbuild.yaml
-gcloud builds submit --config cloudbuild.yaml .
-cat cloudbuild.yaml
-vi cloudbuild.yaml
-cat cloudbuild.yaml
-gcloud builds submit --config cloudbuild.yaml .
-vi cloudbuild.yaml
-gcloud builds submit --config cloudbuild.yaml .
-vi cloudbuild.yaml
-gcloud builds submit --config cloudbuild.yaml .
-vi cloudbuild.yaml
-cat cloudbuild.yaml
-vi cloudbuild.yaml
-gcloud builds submit --config cloudbuild.yaml .
-vi cloudbuild.yaml
 gcloud builds submit --config cloudbuild.yaml .
 kubectl get deployments --all-namespaces
 ls -l deployment.yaml
